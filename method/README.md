@@ -7,3 +7,9 @@ overriden.
 
 This is useful for REST APIs and services making use of many HTTP verbs, and
 when the HTTP clients don't support all of them.
+
+## Installation
+
+```shell
+go get github.com/syntaqx/echo-middleware/method
+``
