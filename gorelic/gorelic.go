@@ -35,9 +35,9 @@ func Handler() echo.MiddlewareFunc {
 	return func(h echo.HandlerFunc) echo.HandlerFunc {
 		return func(c *echo.Context) error {
 			startTime := time.Now()
-			h(c)
+			err := h(c)
 			agent.HTTPTimer.UpdateSince(startTime)
-			return nil
+			return err
 		}
 	}
 }
