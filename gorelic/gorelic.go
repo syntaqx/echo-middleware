@@ -11,6 +11,22 @@ import (
 
 var agent *gorelic.Agent
 
+// Gorelic returns a middleware function that attaches a gorelic agent
+func Handler() echo.MiddlewareFunc {
+	return func(h echo.HandlerFunc) echo.HandlerFunc {
+		return func(c *echo.Context) error {
+			startTime := time.Now()
+			err := h(c)
+
+			if agent != nil {
+				agent.HTTPTimer.UpdateSince(startTime)
+			}
+
+			return err
+		}
+	}
+}
+
 // InitNewRelicAgent initializes a new gorelic agent for usage in Handler
 func InitNewRelicAgent(license string, appname string, verbose bool) error {
 	if license == "" {
@@ -28,16 +44,4 @@ func InitNewRelicAgent(license string, appname string, verbose bool) error {
 	agent.Run()
 
 	return nil
-}
-
-// Gorelic returns a middleware function that attaches a gorelic agent
-func Handler() echo.MiddlewareFunc {
-	return func(h echo.HandlerFunc) echo.HandlerFunc {
-		return func(c *echo.Context) error {
-			startTime := time.Now()
-			err := h(c)
-			agent.HTTPTimer.UpdateSince(startTime)
-			return err
-		}
-	}
 }
