@@ -29,10 +29,10 @@ func Handler() echo.MiddlewareFunc {
 
 // InitNewRelicAgent initializes a new gorelic agent for usage in Handler
 func InitNewRelicAgent(license string, appname string, verbose bool) (*gorelic.Agent, error) {
-	agent = gorelic.NewAgent()
 	if license == "" {
-		return agent, fmt.Errorf("Please specify a NewRelic license")
+		return gorelic.NewAgent(), fmt.Errorf("Please specify a NewRelic license")
 	}
+	agent = gorelic.NewAgent()
 
 	agent.NewrelicLicense = license
 	agent.NewrelicName = appname
