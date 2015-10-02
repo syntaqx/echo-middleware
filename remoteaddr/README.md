@@ -35,7 +35,6 @@ func main() {
 
     e.Run(":8080")
 }
-
 ```
 
 Then, run your server:
