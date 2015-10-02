@@ -6,3 +6,4 @@ Set of middlewares created for the Echo framework.
 
 * [Gorelic](./gorelic)
 * [Method](./gorelic)
+* [RemoteAddr](./remoteaddr)
