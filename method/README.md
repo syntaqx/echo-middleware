@@ -12,4 +12,4 @@ when the HTTP clients don't support all of them.
 
 ```shell
 go get github.com/syntaqx/echo-middleware/method
-``
+```
