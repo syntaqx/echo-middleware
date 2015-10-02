@@ -6,6 +6,13 @@ import "net/http"
 type RemoteAddr struct {
 }
 
+const (
+	TrueClientIP   = "True-Client-IP"   // Edge providers (such as Akamai)
+	TrueRealIP     = "True-Real-IP"     // Proxies (like Nginx)
+	XForwardedFor  = "X-Forwarded-For"  // External proxies (like an ELB or router)
+	XOriginatingIP = "X-Originating-IP" // Defacto email header
+)
+
 // New creates a new RemoteAddr handler
 func New() *RemoteAddr {
 	r := &RemoteAddr{}
@@ -37,10 +44,10 @@ func (ra *RemoteAddr) ServeHTTP(w http.ResponseWriter, r *http.Request, next htt
 func (ra *RemoteAddr) handleActualRequest(w http.ResponseWriter, r *http.Request) {
 	var ipAddress string
 	var ipSources = []string{
-		r.Header.Get("True-Client-IP"),   // Edge providers (such as Akamai)
-		r.Header.Get("True-Real-IP"),     // Proxies (like Nginx)
-		r.Header.Get("X-Forwarded-For"),  // External proxies (like an ELB or router)
-		r.Header.Get("X-Originating-IP"), // Defacto email header
+		r.Header.Get(TrueClientIP),
+		r.Header.Get(TrueRealIP),
+		r.Header.Get(XForwardedFor),
+		r.Header.Get(XOriginatingIP),
 	}
 
 	// Iterate the ipSources to determine the valid address
