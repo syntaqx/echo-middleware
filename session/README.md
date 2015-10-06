@@ -1,6 +1,6 @@
 # Session
 
-Middleware support for echo, utilized by
+Middleware support for echo, utilizing by
 [gorilla/sessions](github.com/gorilla/sessions).
 
 ## Installation
@@ -49,7 +49,7 @@ func index(c *echo.Context) error {
 
 func main() {
     store := session.NewCookieStore([]byte("secret-key"))
-    // store := session.NewFilesystemStore([]byte("secret-key"))
+    // store := session.NewFilesystemStore(nil, []byte("secret-key"))
     // store, err := session.NewRedisStore(32, "tcp", "localhost:6379", "", []byte("secret-key"))
     // if err != nil {
     //     panic(err)
