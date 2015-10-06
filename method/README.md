@@ -13,3 +13,23 @@ when the HTTP clients don't support all of them.
 ```shell
 go get github.com/syntaqx/echo-middleware/method
 ```
+
+## Usage
+
+```go
+package main
+
+import (
+    "github.com/labstack/echo"
+    "github.com/syntaqx/echo-middleware/method"
+)
+
+func main() {
+    e := echo.New()
+
+    // Attach middleware
+    e.Use(method.Override())
+
+    e.Run(":8080")
+}
+```

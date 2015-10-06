@@ -6,7 +6,7 @@ possible headers.
 ## Install
 
 ```sh
-go get github.com/syntaqx/echo-middleware # or, you could specify only remoteaddr
+go get github.com/syntaqx/echo-middleware/remoteaddr
 ```
 
 ## Getting Started
