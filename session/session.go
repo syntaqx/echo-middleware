@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	DefaultKey  = "github.com/ipfans/echo-session"
+	DefaultKey  = "github.com/syntaqx/echo-middleware/session"
 	errorFormat = "[sessions] ERROR! %s\n"
 )
 
