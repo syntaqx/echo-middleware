@@ -5,7 +5,6 @@ package method
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/labstack/echo"
 )
@@ -45,8 +44,6 @@ func isValidOverrideMethod(method string) bool {
 // so only Request.Method which are POSTs are considered.
 func Override() echo.HandlerFunc {
 	return func(c *echo.Context) error {
-		fmt.Println(c.Request().Method)
-
 		if c.Request().Method == "POST" {
 			m := c.Form(ParamHTTPMethodOverride)
 			if isValidOverrideMethod(m) {
