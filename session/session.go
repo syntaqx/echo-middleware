@@ -59,7 +59,15 @@ type Session interface {
 func Sessions(name string, store Store) echo.MiddlewareFunc {
 	return func(h echo.HandlerFunc) echo.HandlerFunc {
 		return func(c *echo.Context) error {
-			s := &session{name, c.Request(), store, nil, false, c.Response().Writer()}
+			s := &session{
+				name,
+				c.Request(),
+				store,
+				nil,
+				false,
+				c.Response().Writer(),
+			}
+
 			c.Set(DefaultKey, s)
 			return h(c)
 		}
