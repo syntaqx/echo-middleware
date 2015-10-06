@@ -58,10 +58,10 @@ type Session interface {
 
 func Sessions(name string, store Store) echo.MiddlewareFunc {
 	return func(h echo.HandlerFunc) echo.HandlerFunc {
-		return func(ctx *echo.Context) error {
-			s := &session{name, ctx.Request(), store, nil, false, ctx.Response().Writer()}
-			ctx.Set(DefaultKey, s)
-			return h(ctx)
+		return func(c *echo.Context) error {
+			s := &session{name, c.Request(), store, nil, false, c.Response().Writer()}
+			c.Set(DefaultKey, s)
+			return h(c)
 		}
 	}
 }
@@ -142,10 +142,10 @@ func (s *session) Written() bool {
 }
 
 // shortcut to get session
-func Default(ctx *echo.Context) Session {
-	session := ctx.Get(DefaultKey)
+func Default(c *echo.Context) Session {
+	session := c.Get(DefaultKey)
 	if session == nil {
 		return nil
 	}
-	return ctx.Get(DefaultKey).(Session)
+	return c.Get(DefaultKey).(Session)
 }
