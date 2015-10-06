@@ -1,6 +1,7 @@
 # Session
 
-Middleware support for echo by gorilla/session
+Middleware support for echo, utilized by
+[gorilla/sessions](github.com/gorilla/sessions).
 
 ## Installation
 
@@ -16,6 +17,7 @@ package main
 import (
     "net/http"
 
+    "github.com/gorilla/context"
     "github.com/labstack/echo"
     "github.com/syntaqx/echo-middleware/session"
 )
@@ -60,6 +62,7 @@ func main() {
     // Routes
     e.Get("/", index)
 
-    e.Run(":8080")
+    // Wrap echo with a context.ClearHandler
+    http.ListenAndServe(":8080", context.ClearHandler(e))
 }
 ```
